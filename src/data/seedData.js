@@ -192,7 +192,7 @@ export const COURSES = [
     professorId: 'prof-2',
     career: 'Ingeniería del Software',
     credits: 4,
-    color: '#7C3AED',
+    color: '#F97316',
     period: '2025-C3',
     studentIds: ['est-1', 'est-2', 'est-3', 'est-4', 'est-5'],
     description: 'Introducción al cálculo diferencial: límites, continuidad, derivadas y sus aplicaciones. Base matemática indispensable para el análisis computacional.',

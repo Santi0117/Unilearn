@@ -31,8 +31,8 @@ function CoursesListPage() {
   return (
     <div className="max-w-6xl mx-auto fade-in">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Mis Cursos</h1>
-        <span className="text-sm text-gray-400">{courses.length} cursos activos</span>
+        <h1 data-testid="courses-title" className="text-2xl font-bold text-gray-900">Mis Cursos</h1>
+        <span data-testid="courses-count" className="text-sm text-gray-400">{courses.length} cursos activos</span>
       </div>
       {courses.length === 0 ? (
         <div className="text-center py-20 bg-white rounded-2xl border border-gray-100">
@@ -40,7 +40,7 @@ function CoursesListPage() {
           <h3 className="font-semibold text-gray-500">Sin cursos asignados</h3>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div data-testid="courses-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {courses.map(c => <CourseCard key={c.id} course={c} />)}
         </div>
       )}
@@ -53,7 +53,7 @@ function InnerApp() {
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
     </div>
   );
 

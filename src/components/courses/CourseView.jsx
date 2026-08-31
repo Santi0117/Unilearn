@@ -26,8 +26,9 @@ function WeekTab({ number, active, onClick, hasContent }) {
   return (
     <button
       onClick={onClick}
+      data-testid={`week-tab-${number}`}
       className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
-        active ? 'bg-blue-600 text-white' : hasContent ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-300 cursor-default'
+        active ? 'bg-orange-500 text-white' : hasContent ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-300 cursor-default'
       }`}
     >
       S{number}
@@ -79,7 +80,7 @@ function AddActivityModal({ courseId, week, onClose }) {
         <div className="grid grid-cols-3 gap-2">
           {TYPES.map(t => (
             <button key={t.id} onClick={() => setType(t.id)}
-              className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all text-xs font-medium ${type === t.id ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 hover:border-gray-300 text-gray-600'}`}>
+              className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all text-xs font-medium ${type === t.id ? 'border-orange-500 bg-orange-50 text-orange-700' : 'border-gray-200 hover:border-gray-300 text-gray-600'}`}>
               <t.icon size={18} />
               {t.label}
             </button>
@@ -91,7 +92,7 @@ function AddActivityModal({ courseId, week, onClose }) {
         <label className="text-sm font-medium text-gray-700 block mb-1.5">Título *</label>
         <input value={form.title} onChange={e => set('title', e.target.value)}
           placeholder={`Título de la ${type === 'task' ? 'tarea' : type === 'quiz' ? 'evaluación' : 'actividad'}`}
-          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
       </div>
 
@@ -99,7 +100,7 @@ function AddActivityModal({ courseId, week, onClose }) {
         <label className="text-sm font-medium text-gray-700 block mb-1.5">Descripción</label>
         <textarea value={form.description} onChange={e => set('description', e.target.value)}
           rows={3} placeholder="Descripción breve..."
-          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
         />
       </div>
 
@@ -108,13 +109,13 @@ function AddActivityModal({ courseId, week, onClose }) {
           <div>
             <label className="text-sm font-medium text-gray-700 block mb-1.5">Fecha límite</label>
             <input type="datetime-local" value={form.dueAt} onChange={e => set('dueAt', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
           </div>
           <div>
             <label className="text-sm font-medium text-gray-700 block mb-1.5">Puntos</label>
             <input type="number" value={form.points} onChange={e => set('points', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
           </div>
         </div>
@@ -185,7 +186,7 @@ export default function CourseView() {
   return (
     <div className="max-w-6xl mx-auto fade-in">
       {/* Back */}
-      <button onClick={() => navigate('/courses')} className="flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4 text-sm">
+      <button onClick={() => navigate('/courses')} data-testid="course-back" className="flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4 text-sm">
         <ChevronLeft size={16} /> Mis Cursos
       </button>
 
@@ -194,10 +195,10 @@ export default function CourseView() {
         <div className="p-6 sm:p-8">
           <div className="flex items-start justify-between flex-wrap gap-4">
             <div>
-              <span className="text-sm font-medium text-white/60">{course.code}</span>
-              <h1 className="text-2xl font-bold text-white mt-1">{course.name}</h1>
-              <p className="text-white/70 mt-2 text-sm">{professor?.name}</p>
-              <p className="text-white/50 text-sm mt-1">{students.length} estudiantes · {course.credits} créditos</p>
+              <span data-testid="course-code" className="text-sm font-medium text-white/60">{course.code}</span>
+              <h1 data-testid="course-title" className="text-2xl font-bold text-white mt-1">{course.name}</h1>
+              <p data-testid="course-professor" className="text-white/70 mt-2 text-sm">{professor?.name}</p>
+              <p data-testid="course-meta" className="text-white/50 text-sm mt-1">{students.length} estudiantes · {course.credits} créditos</p>
             </div>
             {isProfessor && (
               <button onClick={() => setShowAnnounce(true)}
@@ -213,6 +214,7 @@ export default function CourseView() {
       <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-6 flex-wrap">
         {TABS.map(t => (
           <button key={t.id} onClick={() => setActiveTab(t.id)}
+            data-testid={`course-tab-${t.id}`}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex-1 min-w-fit ${activeTab === t.id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
             {t.label}
           </button>
@@ -230,7 +232,7 @@ export default function CourseView() {
           </div>
 
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-gray-900">Semana {activeWeek}</h2>
+            <h2 data-testid="week-heading" className="font-semibold text-gray-900">Semana {activeWeek}</h2>
             {isProfessor && (
               <Button size="sm" onClick={() => setShowAdd(true)}>
                 <Plus size={14} /> Agregar contenido
@@ -259,7 +261,7 @@ export default function CourseView() {
       {/* ─── Tab: Participants ───────────────────────────────────────────── */}
       {activeTab === 'participants' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-gray-100 p-5">
+          <div data-testid="participants-professor" className="bg-white rounded-2xl border border-gray-100 p-5">
             <h3 className="font-semibold text-gray-900 mb-4">Docente</h3>
             {professor && (
               <div className="flex items-center gap-4">
@@ -269,7 +271,7 @@ export default function CourseView() {
                   <div className="text-sm text-gray-500">{professor.degree}</div>
                   <div className="text-sm text-gray-400 mt-0.5">{professor.email}</div>
                   {professor.officeHours && (
-                    <div className="text-xs text-blue-600 mt-1">Horario de consulta: {professor.officeHours}</div>
+                    <div className="text-xs text-orange-600 mt-1">Horario de consulta: {professor.officeHours}</div>
                   )}
                 </div>
               </div>
@@ -277,12 +279,12 @@ export default function CourseView() {
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-100 p-5">
-            <h3 className="font-semibold text-gray-900 mb-4">Estudiantes ({students.length})</h3>
+            <h3 data-testid="participants-students-title" className="font-semibold text-gray-900 mb-4">Estudiantes ({students.length})</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {students.map(s => {
                 const { weighted } = getStudentGrades(courseId, s.id);
                 return (
-                  <div key={s.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                  <div key={s.id} data-testid="participant-row" className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
                     <Avatar name={s.name} size="sm" />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-medium text-gray-800">{s.name}</div>
@@ -320,7 +322,7 @@ export default function CourseView() {
               ) : (
                 <div className="space-y-4">
                   {courseAnnouncements.map(ann => (
-                    <div key={ann.id} className="border-l-2 border-blue-500 pl-4 py-1">
+                    <div key={ann.id} className="border-l-2 border-orange-500 pl-4 py-1">
                       <div className="font-medium text-gray-800">{ann.title}</div>
                       <div className="text-sm text-gray-600 mt-1 whitespace-pre-line">{ann.content}</div>
                       <div className="text-xs text-gray-400 mt-2">{timeAgo(ann.postedAt)}</div>
@@ -339,7 +341,7 @@ export default function CourseView() {
               ) : (
                 <div className="space-y-4">
                   {courseAnnouncements.map(ann => (
-                    <div key={ann.id} className="border-l-2 border-blue-500 pl-4">
+                    <div key={ann.id} className="border-l-2 border-orange-500 pl-4">
                       <div className="font-medium text-gray-800">{ann.title}</div>
                       <div className="text-sm text-gray-600 mt-1">{ann.content}</div>
                       <div className="text-xs text-gray-400 mt-2">{timeAgo(ann.postedAt)}</div>
@@ -409,11 +411,11 @@ export default function CourseView() {
         <div className="p-6 space-y-4">
           <input value={annTitle} onChange={e => setAnnTitle(e.target.value)}
             placeholder="Título del anuncio"
-            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
           <textarea value={annContent} onChange={e => setAnnContent(e.target.value)}
             rows={5} placeholder="Contenido del anuncio..."
-            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
           />
           <div className="flex gap-2 justify-end">
             <Button variant="secondary" size="sm" onClick={() => setShowAnnounce(false)}>Cancelar</Button>

@@ -6,7 +6,7 @@
 body {
   margin: 0;
   font-family: 'Inter', system-ui, sans-serif;
-  background: #F9FAFB;
+  background: #FAFAFA;
   color: #111827;
   -webkit-font-smoothing: antialiased;
 }
@@ -16,8 +16,7 @@ body {
   min-height: 100svh;
 }
 
-.dark body { background: #0f172a; color: #f1f5f9; }
-
+/* ── Animations ─────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -30,9 +29,102 @@ body {
 }
 .slide-in { animation: slideIn 0.22s ease-out both; }
 
-.scrollbar-thin::-webkit-scrollbar { width: 4px; }
-.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(2deg); }
+  66%       { transform: translateY(-6px) rotate(-1deg); }
+}
+.float { animation: float 6s ease-in-out infinite; }
 
-/* Timer ring */
+@keyframes floatDelay {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(-2deg); }
+  66%       { transform: translateY(-8px) rotate(1deg); }
+}
+.float-delay { animation: floatDelay 8s ease-in-out infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.35); }
+  50%       { box-shadow: 0 0 40px rgba(249, 115, 22, 0.65); }
+}
+.glow-pulse { animation: pulse-glow 3s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Glassmorphism ───────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Gradient text ───────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #F97316, #EA580C, #FB923C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Shimmer button ──────────────────────────────────────── */
+.shimmer-btn {
+  background: linear-gradient(90deg, #EA580C 0%, #F97316 40%, #FB923C 60%, #EA580C 100%);
+  background-size: 200% auto;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ── Dot grid background ─────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(249, 115, 22, 0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Card hover lift ─────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(249, 115, 22, 0.12);
+}
+
+/* ── Orange glow border ──────────────────────────────────── */
+.orange-glow {
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.3), 0 4px 20px rgba(249, 115, 22, 0.15);
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+.scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(249, 115, 22, 0.3); border-radius: 4px; }
+
+html, body, #root {
+  max-width: 100%;
+}
+
+main {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Timer ring ──────────────────────────────────────────── */
 .timer-ring { transition: stroke-dashoffset 1s linear; }
+
+/* ── Mesh gradient utility ───────────────────────────────── */
+.mesh-bg {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(234, 88, 12, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 60% 80%, rgba(251, 146, 60, 0.06) 0%, transparent 60%),
+    #FAFAFA;
+}

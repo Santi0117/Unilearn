@@ -6,7 +6,7 @@ export default function LinkActivity({ activity }) {
   const [expanded, setExpanded] = useState(false);
 
   const statusColor = {
-    upcoming: 'bg-blue-100 text-blue-700',
+    upcoming: 'bg-orange-100 text-orange-700',
     live: 'bg-red-100 text-red-700',
     finished: 'bg-gray-100 text-gray-600',
   };
@@ -20,13 +20,13 @@ export default function LinkActivity({ activity }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       <div className="flex items-start gap-3 p-4 cursor-pointer" onClick={() => setExpanded(!expanded)}>
-        <div className="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-          <Video size={18} className="text-blue-600" />
+        <div className="w-9 h-9 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0">
+          <Video size={18} className="text-orange-600" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-3 flex-wrap">
             <div>
-              <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Sesión Sincrónica</span>
+              <span className="text-xs font-semibold text-orange-600 uppercase tracking-wide">Sesión Sincrónica</span>
               <h4 className="font-semibold text-gray-900 text-sm mt-0.5">{activity.title}</h4>
             </div>
             <div className="flex items-center gap-2">
@@ -55,7 +55,7 @@ export default function LinkActivity({ activity }) {
               activity.status === 'live'
                 ? 'bg-red-600 hover:bg-red-700 text-white'
                 : activity.status === 'upcoming'
-                ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                ? 'bg-orange-500 hover:bg-orange-600 text-white'
                 : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
             }`}
           >

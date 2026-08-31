@@ -39,6 +39,9 @@ export default function CourseCard({ course }) {
   return (
     <div
       onClick={() => navigate(`/courses/${course.id}`)}
+      data-testid="course-card"
+      data-course-id={course.id}
+      data-course-code={course.code}
       className="bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
     >
       {/* Banner */}
@@ -60,7 +63,7 @@ export default function CourseCard({ course }) {
       </div>
 
       <div className="p-4">
-        <h3 className="font-semibold text-gray-900 text-sm leading-snug mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
+        <h3 data-testid="course-card-name" className="font-semibold text-gray-900 text-sm leading-snug mb-1 group-hover:text-orange-600 transition-colors line-clamp-2">
           {course.name}
         </h3>
         <p className="text-xs text-gray-400 mb-3 flex items-center gap-1">
@@ -88,7 +91,7 @@ export default function CourseCard({ course }) {
 
         <div className="mt-3 flex items-center justify-between">
           <span className="text-xs text-gray-400">{activities.length} actividades</span>
-          <span className="text-blue-600 flex items-center gap-1 text-xs font-medium group-hover:gap-2 transition-all">
+          <span className="text-orange-600 flex items-center gap-1 text-xs font-medium group-hover:gap-2 transition-all">
             Ir al curso <ArrowRight size={13} />
           </span>
         </div>

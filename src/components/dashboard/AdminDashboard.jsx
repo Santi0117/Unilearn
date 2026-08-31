@@ -34,7 +34,7 @@ export default function AdminDashboard() {
     <div className="max-w-7xl mx-auto fade-in">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Panel Administrativo</h1>
-        <p className="text-gray-500 text-sm mt-0.5">Universidad CENFOTEC — Vista institucional</p>
+        <p className="text-gray-500 text-sm mt-0.5">UniLearn — Vista institucional</p>
       </div>
 
       {/* KPIs */}
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
         ].map(({ icon: Icon, color, label, value }) => (
           <div key={label} className="bg-white rounded-2xl border border-gray-100 p-4">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${
-              { blue: 'bg-blue-50 text-blue-600', purple: 'bg-purple-50 text-purple-600', green: 'bg-emerald-50 text-emerald-600', amber: 'bg-amber-50 text-amber-600' }[color]
+              { blue: 'bg-orange-50 text-orange-600', purple: 'bg-orange-50 text-orange-600', green: 'bg-emerald-50 text-emerald-600', amber: 'bg-amber-50 text-amber-600' }[color]
             }`}>
               <Icon size={20} />
             </div>
@@ -95,11 +95,11 @@ export default function AdminDashboard() {
           <button key={item.to} onClick={() => navigate(item.to)}
             className="bg-white rounded-2xl border border-gray-100 p-5 text-left hover:shadow-md hover:-translate-y-0.5 transition-all group">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${
-              { blue: 'bg-blue-100 text-blue-600', purple: 'bg-purple-100 text-purple-600', green: 'bg-emerald-100 text-emerald-600' }[item.color]
+              { blue: 'bg-orange-100 text-orange-600', purple: 'bg-orange-100 text-orange-600', green: 'bg-emerald-100 text-emerald-600' }[item.color]
             }`}>
               <item.icon size={20} />
             </div>
-            <div className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{item.label}</div>
+            <div className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">{item.label}</div>
             <div className="text-sm text-gray-400 mt-0.5">{item.desc}</div>
           </button>
         ))}

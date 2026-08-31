@@ -30,7 +30,7 @@ export default function UserManagement() {
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Buscar por nombre o correo..."
-              className="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
           </div>
           <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
@@ -76,7 +76,7 @@ export default function UserManagement() {
                   </td>
                   <td className="px-5 py-3 text-right">
                     <div className="flex items-center gap-1 justify-end">
-                      <button className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-blue-600 transition-colors">
+                      <button className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-orange-600 transition-colors">
                         <Edit2 size={14} />
                       </button>
                       <button className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-amber-600 transition-colors">

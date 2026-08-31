@@ -184,10 +184,10 @@ export default function ProfessorDashboard() {
 
 function KPICard({ icon: Icon, color, label, value, urgent }) {
   const colors = {
-    blue: 'bg-blue-50 text-blue-600',
+    blue: 'bg-orange-50 text-orange-600',
     green: 'bg-emerald-50 text-emerald-600',
     red: 'bg-red-50 text-red-600',
-    purple: 'bg-purple-50 text-purple-600',
+    purple: 'bg-orange-50 text-orange-600',
   };
   return (
     <div className={`bg-white rounded-2xl border p-4 ${urgent ? 'border-red-200' : 'border-gray-100'}`}>

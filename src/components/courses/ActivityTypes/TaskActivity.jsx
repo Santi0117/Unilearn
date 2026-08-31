@@ -27,8 +27,8 @@ function RubricTable({ rubric, grades }) {
             <tr key={ri} className="border-t border-gray-100">
               <td className="p-2 font-medium text-gray-700 text-xs align-top max-w-32">{row.criterion}</td>
               {row.levels.map((l, li) => (
-                <td key={li} className={`p-2 text-center text-xs align-top ${grades?.[ri] === li ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-500'}`}>
-                  <div className={`w-4 h-4 rounded-full mx-auto mb-1 border-2 ${grades?.[ri] === li ? 'bg-blue-500 border-blue-500' : 'border-gray-300'}`} />
+                <td key={li} className={`p-2 text-center text-xs align-top ${grades?.[ri] === li ? 'bg-orange-50 text-orange-700 font-semibold' : 'text-gray-500'}`}>
+                  <div className={`w-4 h-4 rounded-full mx-auto mb-1 border-2 ${grades?.[ri] === li ? 'bg-orange-500 border-orange-500' : 'border-gray-300'}`} />
                   <div className="text-xs">{l.desc}</div>
                 </td>
               ))}
@@ -69,7 +69,7 @@ export default function TaskActivity({ activity, courseId }) {
 
   const statusChip = () => {
     if (isGraded) return <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full ${gradeBg(submission.grade)}`}><CheckCircle size={11} /> {submission.grade}/100</span>;
-    if (hasSubmission) return <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-700"><Clock size={11} /> Entregada</span>;
+    if (hasSubmission) return <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-orange-100 text-orange-700"><Clock size={11} /> Entregada</span>;
     if (overdue) return <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-red-100 text-red-700"><AlertCircle size={11} /> Vencida</span>;
     return <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-amber-100 text-amber-700"><Clock size={11} /> Pendiente</span>;
   };
@@ -119,7 +119,7 @@ export default function TaskActivity({ activity, courseId }) {
           {activity.rubric && (
             <div>
               <button onClick={() => setShowRubric(!showRubric)}
-                className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium">
+                className="flex items-center gap-2 text-sm text-orange-600 hover:text-orange-700 font-medium">
                 {showRubric ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                 Ver rúbrica de evaluación
               </button>
@@ -143,14 +143,14 @@ export default function TaskActivity({ activity, courseId }) {
                     <span className="text-sm text-gray-500">Calificado el {fmtDateTime(submission.gradedAt)}</span>
                   </div>
                   {submission.feedback && (
-                    <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                      <div className="text-xs font-semibold text-blue-700 mb-1">Retroalimentación del docente</div>
+                    <div className="bg-orange-50 rounded-xl p-4 border border-blue-100">
+                      <div className="text-xs font-semibold text-orange-700 mb-1">Retroalimentación del docente</div>
                       <p className="text-sm text-gray-700">{submission.feedback}</p>
                     </div>
                   )}
                   {submission.rubricGrades && activity.rubric && (
                     <button onClick={() => setShowFeedback(!showFeedback)}
-                      className="text-sm text-blue-600 hover:underline">
+                      className="text-sm text-orange-600 hover:underline">
                       {showFeedback ? 'Ocultar' : 'Ver'} detalle de rúbrica calificada
                     </button>
                   )}
@@ -159,11 +159,11 @@ export default function TaskActivity({ activity, courseId }) {
                   )}
                 </div>
               ) : hasSubmission ? (
-                <div className="flex items-center gap-3 bg-blue-50 rounded-xl p-3">
-                  <CheckCircle size={18} className="text-blue-500 flex-shrink-0" />
+                <div className="flex items-center gap-3 bg-orange-50 rounded-xl p-3">
+                  <CheckCircle size={18} className="text-orange-500 flex-shrink-0" />
                   <div>
-                    <div className="text-sm font-medium text-blue-700">Entrega recibida</div>
-                    <div className="text-xs text-blue-500">{submission.fileName} · {fmtDateTime(submission.submittedAt)}</div>
+                    <div className="text-sm font-medium text-orange-700">Entrega recibida</div>
+                    <div className="text-xs text-orange-500">{submission.fileName} · {fmtDateTime(submission.submittedAt)}</div>
                   </div>
                   <Button size="xs" variant="secondary" className="ml-auto" onClick={() => setShowSubmit(true)}>
                     Reemplazar
@@ -193,7 +193,7 @@ export default function TaskActivity({ activity, courseId }) {
               <input
                 value={fileName} onChange={e => setFileName(e.target.value)}
                 placeholder="ej. mi_proyecto_tarea1.zip"
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function TaskActivity({ activity, courseId }) {
             <textarea
               value={comment} onChange={e => setComment(e.target.value)}
               rows={3} placeholder="Notas para el profesor..."
-              className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
             />
           </div>
           <div className="flex gap-2 justify-end pt-2">

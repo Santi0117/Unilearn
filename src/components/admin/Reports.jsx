@@ -3,7 +3,7 @@ import { USERS } from '../../data/seedData';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, Legend } from 'recharts';
 import { gradeColor } from '../../utils/gradeUtils';
 
-const COLORS = ['#10B981', '#2563EB', '#F59E0B', '#EF4444', '#7C3AED'];
+const COLORS = ['#10B981', '#2563EB', '#F59E0B', '#EF4444', '#F97316'];
 
 export default function Reports() {
   const { courses, getStudentGrades, submissions } = useApp();
@@ -73,7 +73,7 @@ export default function Reports() {
       <div className="bg-white rounded-2xl border border-gray-100 p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-gray-900">Rendimiento de estudiantes</h3>
-          <button className="text-sm text-blue-600 hover:underline">Exportar CSV</button>
+          <button className="text-sm text-orange-600 hover:underline">Exportar CSV</button>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

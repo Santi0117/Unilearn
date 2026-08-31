@@ -27,6 +27,32 @@ export function AppProvider({ children, userId, userRole }) {
   const [messages, setMessages] = useState(() => LS('uni_messages', DIRECT_MESSAGES));
   const [darkMode, setDarkMode] = useState(() => LS('uni_dark', false));
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const syncSidebar = () => {
+      if (mq.matches) {
+        setSidebarVisible(true);
+      } else {
+        setSidebarVisible(false);
+        setSidebarOpen(true);
+      }
+    };
+    syncSidebar();
+    mq.addEventListener('change', syncSidebar);
+    return () => mq.removeEventListener('change', syncSidebar);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    if (!mq.matches && sidebarVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [sidebarVisible]);
 
   useEffect(() => { save('uni_activities', activities); }, [activities]);
   useEffect(() => { save('uni_submissions', submissions); }, [submissions]);
@@ -218,8 +244,8 @@ export function AppProvider({ children, userId, userRole }) {
   return (
     <AppContext.Provider value={{
       courses, activities, submissions, forumPosts, announcements, notifications,
-      videoProgress, materialViews, badges, messages, darkMode, sidebarOpen,
-      setDarkMode, setSidebarOpen,
+      videoProgress, materialViews, badges, messages, darkMode, sidebarOpen, sidebarVisible,
+      setDarkMode, setSidebarOpen, setSidebarVisible,
       getCourse, getMyCourses, getCourseActivities, getWeekActivities,
       getSubmission, getActivitySubmissions, getStudentGrades,
       submitTask, submitQuiz, gradeSubmission,

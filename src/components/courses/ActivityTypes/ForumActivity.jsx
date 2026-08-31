@@ -47,7 +47,7 @@ export default function ForumActivity({ activity }) {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-400">{posts.length} participaciones</span>
-              {activity.isGraded && <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">{activity.points} pts</span>}
+              {activity.isGraded && <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-medium">{activity.points} pts</span>}
               {expanded ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function ForumActivity({ activity }) {
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-semibold text-gray-800">{poster?.name || post.studentName}</span>
                         {poster?.role === 'professor' && (
-                          <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-medium">Docente</span>
+                          <span className="text-xs bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded font-medium">Docente</span>
                         )}
                       </div>
                       <span className="text-xs text-gray-400">{timeAgo(post.postedAt)}</span>
@@ -89,7 +89,7 @@ export default function ForumActivity({ activity }) {
                           <Avatar name={replier?.name || reply.studentName} size="xs" />
                           <span className="text-xs font-semibold text-gray-700">{replier?.name || reply.studentName}</span>
                           {replier?.role === 'professor' && (
-                            <span className="text-xs bg-blue-100 text-blue-700 px-1 py-0.5 rounded font-medium">Docente</span>
+                            <span className="text-xs bg-orange-100 text-orange-700 px-1 py-0.5 rounded font-medium">Docente</span>
                           )}
                           <span className="text-xs text-gray-400">{timeAgo(reply.postedAt)}</span>
                         </div>
@@ -99,7 +99,7 @@ export default function ForumActivity({ activity }) {
                   })}
 
                   <button onClick={() => setReplyTo(replyTo === post.id ? null : post.id)}
-                    className="ml-11 mt-2 flex items-center gap-1 text-xs text-gray-400 hover:text-blue-600 transition-colors">
+                    className="ml-11 mt-2 flex items-center gap-1 text-xs text-gray-400 hover:text-orange-600 transition-colors">
                     <Reply size={12} /> Responder
                   </button>
 
@@ -107,11 +107,11 @@ export default function ForumActivity({ activity }) {
                     <div className="ml-11 mt-2 flex gap-2 fade-in">
                       <input value={replyText} onChange={e => setReplyText(e.target.value)}
                         placeholder="Tu respuesta..."
-                        className="flex-1 px-3 py-1.5 text-xs border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 px-3 py-1.5 text-xs border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                         onKeyDown={e => e.key === 'Enter' && handleReply(post.id)}
                       />
                       <button onClick={() => handleReply(post.id)}
-                        className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs hover:bg-blue-700">
+                        className="px-3 py-1.5 bg-orange-500 text-white rounded-lg text-xs hover:bg-orange-600">
                         <Send size={11} />
                       </button>
                     </div>
@@ -133,11 +133,11 @@ export default function ForumActivity({ activity }) {
             <div className="flex-1">
               <textarea value={newPost} onChange={e => setNewPost(e.target.value)}
                 rows={3} placeholder="Comparte tu respuesta o reflexión..."
-                className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
               />
               <div className="flex justify-end mt-2">
                 <button onClick={handlePost} disabled={!newPost.trim() || posting}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+                  className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
                   <Send size={13} />
                   {posting ? 'Publicando...' : 'Publicar'}
                 </button>

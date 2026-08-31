@@ -8,9 +8,9 @@ import { fmtDateTime } from '../../utils/dateUtils';
 
 const ACTIVITY_COLORS = {
   task: { color: 'bg-amber-500', icon: FileText, label: 'Tarea' },
-  quiz: { color: 'bg-purple-500', icon: HelpCircle, label: 'Quiz' },
+  quiz: { color: 'bg-orange-500', icon: HelpCircle, label: 'Quiz' },
   video: { color: 'bg-red-400', icon: Video, label: 'Video' },
-  sync: { color: 'bg-blue-500', icon: Calendar, label: 'Sesión' },
+  sync: { color: 'bg-orange-500', icon: Calendar, label: 'Sesión' },
 };
 
 export default function CalendarPage() {
@@ -42,14 +42,16 @@ export default function CalendarPage() {
   return (
     <div className="max-w-5xl mx-auto fade-in">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Calendario Académico</h1>
+        <h1 data-testid="calendar-title" className="text-2xl font-bold text-gray-900">Calendario Académico</h1>
         <div className="flex items-center gap-2">
           <button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
+            data-testid="calendar-prev"
             className="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors"><ChevronLeft size={18} /></button>
-          <span className="text-sm font-semibold text-gray-800 min-w-36 text-center capitalize">
+          <span data-testid="calendar-month" className="text-sm font-semibold text-gray-800 min-w-36 text-center capitalize">
             {format(currentMonth, 'MMMM yyyy', { locale: es })}
           </span>
           <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
+            data-testid="calendar-next"
             className="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors"><ChevronRight size={18} /></button>
         </div>
       </div>
@@ -73,9 +75,12 @@ export default function CalendarPage() {
               return (
                 <button key={day.toISOString()}
                   onClick={() => setSelectedDay(isSelected ? null : day)}
+                  data-testid="calendar-day"
+                  data-day={format(day, 'yyyy-MM-dd')}
+                  data-events={events.length}
                   className={`relative aspect-square rounded-xl flex flex-col items-center justify-start pt-1.5 transition-all text-sm ${
-                    isSelected ? 'bg-blue-600 text-white' :
-                    isToday(day) ? 'bg-blue-50 text-blue-700 font-bold' :
+                    isSelected ? 'bg-orange-500 text-white' :
+                    isToday(day) ? 'bg-orange-50 text-orange-700 font-bold' :
                     !isSameMonth(day, currentMonth) ? 'text-gray-200' :
                     'hover:bg-gray-50 text-gray-700'
                   }`}
@@ -84,7 +89,7 @@ export default function CalendarPage() {
                   {events.length > 0 && (
                     <div className="flex gap-0.5 flex-wrap justify-center mt-0.5 px-0.5">
                       {events.slice(0, 3).map((e, i) => (
-                        <div key={i} className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : e.type === 'task' ? 'bg-amber-400' : e.type === 'quiz' ? 'bg-purple-500' : 'bg-blue-400'}`} />
+                        <div key={i} className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : e.type === 'task' ? 'bg-amber-400' : e.type === 'quiz' ? 'bg-orange-500' : 'bg-blue-400'}`} />
                       ))}
                     </div>
                   )}
@@ -105,10 +110,10 @@ export default function CalendarPage() {
         </div>
 
         {/* Events panel */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div data-testid="calendar-events-panel" className="bg-white rounded-2xl border border-gray-100 p-5">
           {selectedDay ? (
             <>
-              <h3 className="font-semibold text-gray-900 mb-1 capitalize">
+              <h3 data-testid="calendar-selected-day" className="font-semibold text-gray-900 mb-1 capitalize">
                 {format(selectedDay, "EEEE d 'de' MMMM", { locale: es })}
               </h3>
               {selectedEvents.length === 0 ? (
@@ -136,7 +141,7 @@ export default function CalendarPage() {
             </>
           ) : (
             <>
-              <h3 className="font-semibold text-gray-900 mb-4">Próximas actividades</h3>
+              <h3 data-testid="calendar-upcoming-title" className="font-semibold text-gray-900 mb-4">Próximas actividades</h3>
               <div className="space-y-3">
                 {allActivities
                   .filter(a => new Date(a.dueAt || a.scheduledAt) >= new Date())
@@ -153,7 +158,7 @@ export default function CalendarPage() {
                         <div className="min-w-0">
                           <div className="text-xs font-medium text-gray-800 truncate">{event.title}</div>
                           <div className="text-xs text-gray-400">{event.courseName}</div>
-                          <div className="text-xs text-blue-600">{fmtDateTime(event.dueAt || event.scheduledAt)}</div>
+                          <div className="text-xs text-orange-600">{fmtDateTime(event.dueAt || event.scheduledAt)}</div>
                         </div>
                       </div>
                     );

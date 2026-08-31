@@ -35,7 +35,7 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-4xl mx-auto fade-in">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Mi Perfil</h1>
+      <h1 data-testid="profile-title" className="text-2xl font-bold text-gray-900 mb-6">Mi Perfil</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main profile card */}
@@ -47,12 +47,13 @@ export default function ProfilePage() {
                 <div>
                   {editing ? (
                     <input value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
+                      data-testid="profile-name-input"
                       className="text-lg font-bold text-gray-900 border-b border-blue-400 focus:outline-none bg-transparent"
                     />
                   ) : (
-                    <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
+                    <h2 data-testid="profile-name" className="text-xl font-bold text-gray-900">{user.name}</h2>
                   )}
-                  <p className="text-sm text-gray-500 mt-0.5">{user.email}</p>
+                  <p data-testid="profile-email" className="text-sm text-gray-500 mt-0.5">{user.email}</p>
                   <p className="text-xs text-gray-400 capitalize mt-0.5">
                     {user.role === 'professor' ? `${user.degree} · ${user.department}`
                       : user.role === 'student' ? `${user.career} · ID: ${user.studentId}`
@@ -63,11 +64,11 @@ export default function ProfilePage() {
               <div className="flex gap-2">
                 {editing ? (
                   <>
-                    <Button size="sm" onClick={handleSave}><Save size={13} /> Guardar</Button>
-                    <Button size="sm" variant="ghost" onClick={() => setEditing(false)}><X size={13} /></Button>
+                    <Button size="sm" onClick={handleSave} data-testid="profile-save"><Save size={13} /> Guardar</Button>
+                    <Button size="sm" variant="ghost" onClick={() => setEditing(false)} data-testid="profile-cancel"><X size={13} /></Button>
                   </>
                 ) : (
-                  <Button size="sm" variant="secondary" onClick={() => setEditing(true)}>
+                  <Button size="sm" variant="secondary" onClick={() => setEditing(true)} data-testid="profile-edit">
                     <Edit2 size={13} /> Editar
                   </Button>
                 )}
@@ -80,10 +81,11 @@ export default function ProfilePage() {
                 {editing ? (
                   <input value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                     placeholder="+506 0000-0000"
-                    className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    data-testid="profile-phone-input"
+                    className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 ) : (
-                  <span className="text-sm text-gray-700">{user.phone || '—'}</span>
+                  <span data-testid="profile-phone" className="text-sm text-gray-700">{user.phone || '—'}</span>
                 )}
               </div>
               {user.role === 'student' && (
@@ -106,10 +108,11 @@ export default function ProfilePage() {
                 {editing ? (
                   <textarea value={form.bio} onChange={e => setForm(p => ({ ...p, bio: e.target.value }))}
                     rows={3} placeholder="Cuéntanos sobre ti..."
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    data-testid="profile-bio-input"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
                   />
                 ) : (
-                  <p className="text-sm text-gray-600">{user.bio}</p>
+                  <p data-testid="profile-bio" className="text-sm text-gray-600">{user.bio}</p>
                 )}
               </div>
             )}
@@ -140,11 +143,11 @@ export default function ProfilePage() {
           {user.role === 'student' && (
             <div className="bg-white rounded-2xl border border-gray-100 p-5">
               <div className="flex items-center gap-2 mb-4">
-                <BookOpen size={18} className="text-blue-500" />
+                <BookOpen size={18} className="text-orange-500" />
                 <h3 className="font-semibold text-gray-900">Historial Académico</h3>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table data-testid="profile-history" className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100">
                       <th className="text-left py-2 font-medium text-gray-500 text-xs">Curso</th>
@@ -154,7 +157,7 @@ export default function ProfilePage() {
                   </thead>
                   <tbody>
                     {courseHistory.map(c => (
-                      <tr key={c.id} className="border-b border-gray-50">
+                      <tr key={c.id} data-testid="history-row" className="border-b border-gray-50">
                         <td className="py-2.5">
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: c.color }} />
@@ -166,7 +169,7 @@ export default function ProfilePage() {
                           {c.grade > 0 ? `${c.grade}/100` : 'En curso'}
                         </td>
                         <td className="py-2.5 text-center">
-                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${c.grade > 0 ? gradeBg(c.grade) : 'bg-blue-100 text-blue-700'}`}>
+                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${c.grade > 0 ? gradeBg(c.grade) : 'bg-orange-100 text-orange-700'}`}>
                             {c.grade > 0 ? (passes(c.grade) ? 'Aprobado' : 'Reprobado') : 'En curso'}
                           </span>
                         </td>
@@ -185,10 +188,10 @@ export default function ProfilePage() {
             <>
               <div className="bg-white rounded-2xl border border-gray-100 p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <TrendingUp size={16} className="text-blue-500" />
+                  <TrendingUp size={16} className="text-orange-500" />
                   <h3 className="font-semibold text-gray-900 text-sm">Promedio general</h3>
                 </div>
-                <div className={`text-4xl font-bold ${gradeColor(avgGrade)}`}>
+                <div data-testid="profile-average" className={`text-4xl font-bold ${gradeColor(avgGrade)}`}>
                   {avgGrade || '—'}
                 </div>
                 <div className="text-sm text-gray-400 mt-1">de 100 puntos</div>
@@ -200,7 +203,7 @@ export default function ProfilePage() {
                 <div className="text-xs text-gray-400">de {user.credits?.required} requeridos</div>
                 <div className="mt-3">
                   <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div className="h-2 bg-blue-500 rounded-full"
+                    <div className="h-2 bg-orange-500 rounded-full"
                       style={{ width: `${Math.min(100, (user.credits?.earned / user.credits?.required) * 100)}%` }} />
                   </div>
                   <div className="text-xs text-gray-400 mt-1">
@@ -214,7 +217,7 @@ export default function ProfilePage() {
           <div className="bg-white rounded-2xl border border-gray-100 p-5">
             <h3 className="font-semibold text-gray-900 text-sm mb-3">Cambiar contraseña</h3>
             <p className="text-xs text-gray-400 mb-3">Por seguridad, usa al menos 8 caracteres.</p>
-            <input type="password" placeholder="Nueva contraseña" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2" />
+            <input type="password" placeholder="Nueva contraseña" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2" />
             <Button size="sm" variant="secondary" className="w-full justify-center">Actualizar contraseña</Button>
           </div>
         </div>

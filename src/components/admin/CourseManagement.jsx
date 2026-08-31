@@ -28,7 +28,7 @@ export default function CourseManagement() {
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Buscar cursos..."
-            className="w-full pl-9 pr-3 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-9 pr-3 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function CourseManagement() {
                     <span>{course.studentIds.length} estudiantes</span>
                   </div>
                   <button onClick={() => navigate(`/courses/${course.id}`)}
-                    className="flex items-center gap-1 text-sm text-blue-600 hover:underline">
+                    className="flex items-center gap-1 text-sm text-orange-600 hover:underline">
                     Ver curso <ArrowRight size={13} />
                   </button>
                 </div>

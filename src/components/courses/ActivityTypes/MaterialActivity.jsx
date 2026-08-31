@@ -69,7 +69,7 @@ export default function MaterialActivity({ activity }) {
           )}
           {!viewed && (
             <button onClick={handleView}
-              className="text-sm text-blue-600 hover:underline">
+              className="text-sm text-orange-600 hover:underline">
               Marcar como visto
             </button>
           )}

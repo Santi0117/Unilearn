@@ -1,7 +1,7 @@
 export default function Avatar({ name = '', size = 'md', className = '' }) {
   const initials = name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
   const colors = [
-    'bg-blue-500', 'bg-purple-500', 'bg-emerald-500', 'bg-rose-500',
+    'bg-orange-500', 'bg-orange-500', 'bg-emerald-500', 'bg-rose-500',
     'bg-amber-500', 'bg-cyan-500', 'bg-indigo-500', 'bg-pink-500',
   ];
   const color = colors[name.charCodeAt(0) % colors.length];

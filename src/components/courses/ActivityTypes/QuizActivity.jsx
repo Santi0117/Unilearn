@@ -58,13 +58,13 @@ export default function QuizActivity({ activity, courseId }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       <div className="flex items-start gap-3 p-4 cursor-pointer" onClick={() => setExpanded(!expanded)}>
-        <div className="w-9 h-9 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-          <HelpCircle size={18} className="text-purple-600" />
+        <div className="w-9 h-9 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0">
+          <HelpCircle size={18} className="text-orange-600" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-3 flex-wrap">
             <div>
-              <span className="text-xs font-semibold text-purple-600 uppercase tracking-wide">Quiz</span>
+              <span className="text-xs font-semibold text-orange-600 uppercase tracking-wide">Quiz</span>
               <h4 className="font-semibold text-gray-900 text-sm mt-0.5">{activity.title}</h4>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
@@ -151,7 +151,7 @@ export default function QuizActivity({ activity, courseId }) {
 
               {/* Progress bar */}
               <div className="w-full h-1.5 bg-gray-100 rounded-full mb-6">
-                <div className="h-1.5 bg-purple-500 rounded-full transition-all"
+                <div className="h-1.5 bg-orange-500 rounded-full transition-all"
                   style={{ width: `${((currentQ) / activity.questions.length) * 100}%` }} />
               </div>
 
@@ -161,9 +161,9 @@ export default function QuizActivity({ activity, courseId }) {
                   {q.type === 'multiple' && (
                     <div className="space-y-2">
                       {q.options.map(opt => (
-                        <label key={opt.id} className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${answers[q.id] === opt.id ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                        <label key={opt.id} className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${answers[q.id] === opt.id ? 'border-purple-500 bg-orange-50' : 'border-gray-200 hover:border-gray-300'}`}>
                           <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${answers[q.id] === opt.id ? 'border-purple-500' : 'border-gray-300'}`}>
-                            {answers[q.id] === opt.id && <div className="w-2 h-2 rounded-full bg-purple-500" />}
+                            {answers[q.id] === opt.id && <div className="w-2 h-2 rounded-full bg-orange-500" />}
                           </div>
                           <span className="text-sm text-gray-700">{opt.text}</span>
                           <input type="radio" className="sr-only" name={q.id} value={opt.id}
@@ -175,7 +175,7 @@ export default function QuizActivity({ activity, courseId }) {
                   {q.type === 'truefalse' && (
                     <div className="flex gap-3">
                       {[true, false].map(v => (
-                        <label key={String(v)} className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all ${answers[q.id] === v ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                        <label key={String(v)} className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all ${answers[q.id] === v ? 'border-purple-500 bg-orange-50' : 'border-gray-200 hover:border-gray-300'}`}>
                           <input type="radio" className="sr-only" onChange={() => setAnswers(prev => ({ ...prev, [q.id]: v }))} />
                           <span className="font-medium text-sm">{v ? 'Verdadero' : 'Falso'}</span>
                         </label>

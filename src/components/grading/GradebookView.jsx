@@ -51,8 +51,8 @@ function GradeModal({ submission, activity, student, onSave, onClose }) {
         </div>
       )}
       {submission?.comment && (
-        <div className="bg-blue-50 rounded-xl p-3 text-sm text-gray-700">
-          <div className="text-xs font-semibold text-blue-600 mb-1">Comentario del estudiante</div>
+        <div className="bg-orange-50 rounded-xl p-3 text-sm text-gray-700">
+          <div className="text-xs font-semibold text-orange-600 mb-1">Comentario del estudiante</div>
           {submission.comment}
         </div>
       )}
@@ -67,7 +67,7 @@ function GradeModal({ submission, activity, student, onSave, onClose }) {
                 <div className="text-sm font-medium text-gray-700 mb-2">{row.criterion}</div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {row.levels.map((l, li) => (
-                    <label key={li} className={`cursor-pointer p-2 rounded-lg border-2 text-center transition-all ${rubricGrades[ri] === li ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                    <label key={li} className={`cursor-pointer p-2 rounded-lg border-2 text-center transition-all ${rubricGrades[ri] === li ? 'border-orange-500 bg-orange-50' : 'border-gray-200 hover:border-gray-300'}`}>
                       <input type="radio" className="sr-only" onChange={() => {
                         const n = [...rubricGrades];
                         n[ri] = li;
@@ -75,7 +75,7 @@ function GradeModal({ submission, activity, student, onSave, onClose }) {
                         if (!grade) setGrade(n.reduce((sum, lvl, i) => sum + (activity.rubric[i]?.levels[lvl]?.points || 0), 0));
                       }} />
                       <div className="text-xs font-semibold text-gray-700">{l.label}</div>
-                      <div className="text-xs text-blue-600 font-medium">{l.points}pts</div>
+                      <div className="text-xs text-orange-600 font-medium">{l.points}pts</div>
                     </label>
                   ))}
                 </div>
@@ -94,7 +94,7 @@ function GradeModal({ submission, activity, student, onSave, onClose }) {
       <div>
         <label className="text-sm font-medium text-gray-700 block mb-1.5">Calificación (0-100)</label>
         <input type="number" min={0} max={100} value={grade} onChange={e => setGrade(e.target.value)}
-          className="w-32 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold text-lg"
+          className="w-32 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 font-bold text-lg"
         />
       </div>
 
@@ -103,7 +103,7 @@ function GradeModal({ submission, activity, student, onSave, onClose }) {
         <label className="text-sm font-medium text-gray-700 block mb-1.5">Retroalimentación</label>
         <textarea value={feedback} onChange={e => setFeedback(e.target.value)} rows={4}
           placeholder="Comentarios detallados para el estudiante..."
-          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
         />
       </div>
 
@@ -139,11 +139,11 @@ export default function GradebookView({ course }) {
     return (
       <div className="space-y-6">
         {/* Grade summary */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-5">
+        <div data-testid="gradebook-student" className="bg-white rounded-2xl border border-gray-100 p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-gray-900">Calificaciones</h3>
             <div className="flex items-center gap-2">
-              <span className={`text-2xl font-bold ${gradeColor(weighted)}`}>{weighted || '—'}</span>
+              <span data-testid="gradebook-weighted" className={`text-2xl font-bold ${gradeColor(weighted)}`}>{weighted || '—'}</span>
               <span className="text-gray-400 text-sm">/100</span>
               {weighted > 0 && (
                 <span className={`text-sm font-medium px-2 py-0.5 rounded-full ${passes(weighted) ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
@@ -169,7 +169,7 @@ export default function GradebookView({ course }) {
               </thead>
               <tbody>
                 {items.map(item => (
-                  <tr key={item.activityId} className="border-b border-gray-50 hover:bg-gray-50">
+                  <tr key={item.activityId} data-testid="gradebook-row" className="border-b border-gray-50 hover:bg-gray-50">
                     <td className="py-2.5 font-medium text-gray-800 text-sm">{item.title}</td>
                     <td className="py-2.5 text-center text-xs text-gray-500">{item.category}</td>
                     <td className={`py-2.5 text-center font-bold ${gradeColor(item.grade)}`}>
@@ -178,7 +178,7 @@ export default function GradebookView({ course }) {
                     <td className="py-2.5 text-center">
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                         item.grade !== null ? gradeBg(item.grade)
-                        : item.submittedAt ? 'bg-blue-100 text-blue-700'
+                        : item.submittedAt ? 'bg-orange-100 text-orange-700'
                         : 'bg-gray-100 text-gray-500'
                       }`}>
                         {item.grade !== null ? gradeLabel(item.grade)
@@ -257,7 +257,7 @@ export default function GradebookView({ course }) {
                               sub?.grade !== null && sub?.grade !== undefined
                                 ? `${gradeBg(sub.grade)} hover:opacity-80 cursor-pointer`
                                 : sub
-                                ? 'bg-blue-50 text-blue-600 hover:bg-blue-100 cursor-pointer'
+                                ? 'bg-orange-50 text-orange-600 hover:bg-orange-100 cursor-pointer'
                                 : 'text-gray-300 cursor-default'
                             }`}
                           >
